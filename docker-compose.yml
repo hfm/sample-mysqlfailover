@@ -1,0 +1,14 @@
+version: '3'
+services:
+  # scale database out to three via docker-compose up --scale db=3
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    volumes:
+      - ./my.cnf:/etc/mysql/conf.d/my.cnf:ro
+  # running mysqlfailover
+  manager:
+    build: ./
+    depends_on:
+      - db
