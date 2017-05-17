@@ -1,10 +1,5 @@
 ```sh
-docker-compose --project-name mf up --build --scale db=3 -d
-```
+docker-compose --project-name mf up --build --scale db=3
 
-```
-mysqlrpladmin --master=root@mf_db_1 --slaves=root@mf_db_2,root@mf_db_3 --new-master=root@mf_db_2 --demote-master failover
-
-# mysqlrpladmin --master=root@mf_db_1 --slaves=root@mf_db_2,root@mf_db_3 --new-master=root@mf_db_2 --demote-master switchover
-# mysqlrpladmin --master=root@mf_db_1 --slaves=root@mf_db_2,root@mf_db_3 --new-master=root@mf_db_2 --demote-master failover
+docker-compose --project-name mf exec manager tail -f /var/log/failover.log
 ```
